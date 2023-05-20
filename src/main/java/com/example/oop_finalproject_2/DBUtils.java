@@ -49,7 +49,7 @@ public class DBUtils {
     /**
      * The code below takes cares of the functions in regard to registering a new user.
      */
-    public static void registerUser(ActionEvent event, String username, String title, String password, String confirmPassword) {
+    public static void registerUser(ActionEvent event, String username, String title, String password, String confirmPassword, String email) {
         Connection connection = null;
         PreparedStatement psInsert = null;
         PreparedStatement psCheckUserExist = null;
@@ -83,9 +83,10 @@ public class DBUtils {
 
                     alert.show();
                 } else {
-                    psInsert = ((java.sql.Connection) connection).prepareStatement("INSERT INTO users (username, password) VALUES (?, ?)");
+                    psInsert = ((java.sql.Connection) connection).prepareStatement("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
                     psInsert.setString(1, username);
                     psInsert.setString(2, password);
+                    psInsert.setString(3, email);
                     psInsert.executeUpdate();
 
                     changeScene(event, "logged-in.fxml", "Welcome!", username, password);

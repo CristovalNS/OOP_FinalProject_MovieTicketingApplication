@@ -25,6 +25,9 @@ public class RegisterController implements Initializable {
     private TextField tf_confirm_password;
 
     @FXML
+    private TextField tf_email;
+
+    @FXML
     private TextField tf_password;
 
     @FXML
@@ -39,8 +42,8 @@ public class RegisterController implements Initializable {
         button_register.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (!tf_username.getText().trim().isEmpty() && !tf_password.getText().trim().isEmpty()) {
-                    DBUtils.registerUser(event, tf_username.getText(), "Temp", tf_password.getText(), tf_confirm_password.getText());
+                if (!tf_username.getText().trim().isEmpty() && !tf_password.getText().trim().isEmpty() && !tf_email.getText().trim().isEmpty()) {
+                    DBUtils.registerUser(event, tf_username.getText(), "Temp", tf_password.getText(), tf_confirm_password.getText(), tf_email.getText());
                 } else {
                     System.out.println("Please fill in all information!");
                     Alert alert = new Alert(Alert.AlertType.ERROR);
