@@ -96,7 +96,18 @@ public class DBUtils {
                     psInsert.setString(3, email);
                     psInsert.executeUpdate();
 
-                    changeScene(event, "logged-in.fxml", "Welcome!", username, password);
+                    // Temporarily disabled until it's fixed.
+//                    changeScene(event, "logged-in.fxml", "<APP NAME> - Log In/Register", username, password);
+
+                    System.out.println("Account successfully created!");
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setContentText("Account successfully created! Try loging in!");
+
+                    // Set the font style for the text
+                    DialogPane dialogPane = alert.getDialogPane();
+                    dialogPane.setStyle("-fx-font-family: Arial");
+
+                    alert.show();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
