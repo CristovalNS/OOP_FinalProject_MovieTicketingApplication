@@ -5,7 +5,6 @@
 package com.example.oop_finalproject_2;
 
 import java.sql.Connection;
-//import com.almasb.fxgl.net.Connection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,10 +15,14 @@ import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
 import java.sql.*;
 import org.controlsfx.control.action.Action;
+import com.example.oop_finalproject_2.UserSession;
+
 
 import java.io.IOException;
 
 public class DBUtils {
+    public static Integer getUserIdFromDatabase;
+
     public static void changeScene(ActionEvent event, String fxmlFile, String title, String username, String password) {
         Parent root = null;
 
@@ -27,8 +30,12 @@ public class DBUtils {
             try {
                 FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
                 root = loader.load();
+
+                // Log In
                 LoggedInController loggedInController = loader.getController();
                 loggedInController.usernameConfirmation(username);
+                loggedInController.userID(getUserId(username));
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -67,7 +74,7 @@ public class DBUtils {
             alert.show();
         } else {
             try {
-                connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/user-data", "root", "*neoSQL01");
+                connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/userData", "root", "*neoSQL01");
                 psCheckUserExist = ((java.sql.Connection) connection).prepareStatement("SELECT * FROM users WHERE username = ?");
                 psCheckUserExist.setString(1, username);
                 resultSet = psCheckUserExist.executeQuery();
@@ -130,13 +137,13 @@ public class DBUtils {
      * The code below takes cares of the functions in regard to loging in to an existing account.
      */
 
-    public static void logInUser(ActionEvent event, String username, String password) {
+    public static void logInUser(ActionEvent event, String username, String password, Integer user_id) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
-            connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/user-data", "root", "*neoSQL01");
+            connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/userData", "root", "*neoSQL01");
             preparedStatement = ((java.sql.Connection) connection).prepareStatement("SELECT password FROM users WHERE username = ?");
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
@@ -154,7 +161,14 @@ public class DBUtils {
             } else {
                 while (resultSet.next()) {
                     String retrievedPassword = resultSet.getString("password");
+
                     if (retrievedPassword.equals(password)) {
+                        // Stores the information of login
+                        UserSession.setUsername(username);
+                        UserSession.setPassword(password);
+//                        UserSession.setEmail(retrievedEmail);
+//                        UserSession.setUserId(userId);
+
                         changeScene(event, "logged-in.fxml", "Welcome!", username, password);
                     } else {
                         System.out.println("Passwords did not match!");
@@ -195,4 +209,89 @@ public class DBUtils {
             }
         }
     }
+
+    public static int getUserId(String username) {
+        int userId = 0; // Default user ID
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/userData", "root", "*neoSQL01");
+            preparedStatement = connection.prepareStatement("SELECT user_id FROM users WHERE username = ?");
+            preparedStatement.setString(1, username);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                userId = resultSet.getInt("user_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close the resources
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return userId;
+    }
+
+    public static String getUserEmail(String username) {
+        String userEmail = null; // Default user email
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/userData", "root", "*neoSQL01");
+            preparedStatement = connection.prepareStatement("SELECT email FROM users WHERE username = ?");
+            preparedStatement.setString(1, username);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                userEmail = resultSet.getString("email");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close the resources
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return userEmail;
+    }
+
 }

@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,7 +35,9 @@ public class Controller implements Initializable {
         button_login.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.logInUser(event, tf_username.getText(), tf_password.getText());
+                DBUtils.logInUser(event, tf_username.getText(), tf_password.getText(), DBUtils.getUserId(tf_username.getText()));
+                // Testing purposes
+                System.out.println(DBUtils.getUserId(tf_username.getText()));
             }
         });
 
