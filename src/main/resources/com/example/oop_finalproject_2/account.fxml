@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_finalproject_2.AccountController">
+   <children>
+      <AnchorPane prefHeight="583.0" prefWidth="196.0" style="-fx-background-color: #FED700;">
+         <children>
+            <Label layoutX="46.0" layoutY="126.0" text="&lt;APP NAME&gt;">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="74.0" fitWidth="120.0" layoutX="58.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/user-logo.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="16.0" layoutY="525.0" prefHeight="32.0" prefWidth="121.0">
+               <children>
+                  <ImageView fitHeight="34.0" fitWidth="37.0" layoutX="18.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/user-logo.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="button_account" alignment="TOP_LEFT" layoutX="54.0" layoutY="11.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: #FED700;" text="Account">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <Button fx:id="button_movies" alignment="CENTER" layoutX="47.0" layoutY="178.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: #FFFFFF; -fx-border-color: ##D3D3D3;" text="Movies">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="button_purchases" alignment="CENTER" layoutX="47.0" layoutY="268.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: #FFFFFF;" text="Purchases">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="button_food" alignment="CENTER" layoutX="46.0" layoutY="224.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="96.0" style="-fx-background-color: #FFFFFF;" text="Food">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="676.0" prefWidth="605.0">
+         <children>
+            <Label layoutX="25.0" layoutY="52.0" text="Account">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="25.0" layoutY="128.0" text="Username:">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="label_username" layoutX="139.0" layoutY="129.0" text="label_username">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="171.0" text="Email:">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="label_email" layoutX="94.0" layoutY="171.0" text="label_email">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="211.0" text="Password:">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="label_password" layoutX="137.0" layoutY="211.0" text="label_password">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="button_change_details" layoutX="25.0" layoutY="267.0" mnemonicParsing="false" style="-fx-background-color: #FED700;" text="Change Details">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
+               </font>
+            </Button>
+            <Label layoutX="482.0" layoutY="54.0" text="ID:">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="label_user_id" layoutX="516.0" layoutY="54.0" text="ID:">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>
