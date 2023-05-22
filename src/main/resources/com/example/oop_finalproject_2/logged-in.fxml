@@ -26,12 +26,12 @@
       </AnchorPane>
       <AnchorPane prefHeight="341.0" prefWidth="360.0">
          <children>
-            <ImageView fitHeight="100.0" fitWidth="109.0" layoutX="130.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="100.0" fitWidth="109.0" layoutX="130.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/user-logo.png" />
                </image>
             </ImageView>
-            <Label layoutX="21.0" layoutY="200.0" text="Continue login as">
+            <Label layoutX="78.0" layoutY="159.0" text="Continue loging in as">
                <font>
                   <Font name="Arial Rounded MT Bold" size="20.0" />
                </font>
@@ -41,7 +41,7 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Button>
-            <Label fx:id="label_username_confirm" layoutX="200.0" layoutY="200.0" prefHeight="23.0" prefWidth="150.0" text="-">
+            <Label fx:id="label_username_confirm" alignment="CENTER" layoutX="105.0" layoutY="189.0" prefHeight="23.0" prefWidth="150.0" text="-">
                <font>
                   <Font name="Arial Rounded MT Bold" size="20.0" />
                </font>

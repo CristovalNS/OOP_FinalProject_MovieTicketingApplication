@@ -10,8 +10,6 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-//import static com.example.oop_finalproject_2.DBUtils.getUserId;
-
 public class AccountController implements Initializable {
 
 
