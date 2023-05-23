@@ -1,5 +1,7 @@
-package com.example.oop_finalproject_2;
+package com.example.oop_finalproject_2.account;
 
+import com.example.oop_finalproject_2.DBUtils;
+import com.example.oop_finalproject_2.UserSession;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,8 +13,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AccountController implements Initializable {
-
-
     @FXML
     private Button button_account;
 
@@ -40,6 +40,9 @@ public class AccountController implements Initializable {
     @FXML
     private Label label_user_id;
 
+    @FXML
+    private Button button_log_out;
+
     protected String username;
 
     public void setUsername(String username) {
@@ -55,6 +58,7 @@ public class AccountController implements Initializable {
         button_food.setCursor(Cursor.HAND);
         button_movies.setCursor(Cursor.HAND);
         button_purchases.setCursor(Cursor.HAND);
+        button_log_out.setCursor(Cursor.HAND);
 
         // Retrieve user ID from the database and update the label
         int userId = DBUtils.getUserId(UserSession.getUsername());
@@ -72,6 +76,13 @@ public class AccountController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 DBUtils.changeScene(event, "main-menu.fxml", "<APP NAME> - Main Menu", null, null);
+            }
+        });
+
+        button_log_out.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.changeScene(event, "pre-menu-login.fxml", "<APP NAME> - Main Menu", null, null);
             }
         });
     }

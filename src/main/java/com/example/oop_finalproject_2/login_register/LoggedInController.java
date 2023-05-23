@@ -1,6 +1,7 @@
 /** Responsible for the UI that the user sees to confirm a log in to an account **/
-package com.example.oop_finalproject_2;
+package com.example.oop_finalproject_2.login_register;
 
+import com.example.oop_finalproject_2.DBUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

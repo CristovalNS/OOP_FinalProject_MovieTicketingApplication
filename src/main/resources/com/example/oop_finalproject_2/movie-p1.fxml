@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_finalproject_2.MoviePage1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_finalproject_2.moviepages.MoviePage1">
    <children>
       <AnchorPane prefHeight="583.0" prefWidth="196.0" style="-fx-background-color: #FED700;">
          <children>
@@ -90,6 +90,11 @@
                   <Image url="@movie_posters/GoTG_V3.jpg" />
                </image>
             </ImageView>
+            <Label fx:id="label_available_date" alignment="TOP_LEFT" layoutX="38.0" layoutY="526.0" prefHeight="26.0" prefWidth="543.0" text="&lt;Available&gt;">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="15.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

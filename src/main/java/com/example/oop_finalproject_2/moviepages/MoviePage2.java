@@ -1,25 +1,18 @@
-package com.example.oop_finalproject_2;
+package com.example.oop_finalproject_2.moviepages;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class MoviePage1 extends BaseMovieTemplateController implements Initializable {
+public class MoviePage2 extends BaseMovieTemplateController implements Initializable {
 
-    @FXML
-    private Button button_buy_ticket;
     @FXML
     private ImageView img_movie_poster;
-
     @FXML
     private Label label_movie_cast;
 
@@ -44,7 +37,7 @@ public class MoviePage1 extends BaseMovieTemplateController implements Initializ
             // Create a SQL statement
             String query = "SELECT * FROM movies WHERE movie_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, 1);
+            statement.setInt(1, 2);
 
             // Execute the query
             ResultSet resultSet = statement.executeQuery();
@@ -75,13 +68,5 @@ public class MoviePage1 extends BaseMovieTemplateController implements Initializ
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        button_buy_ticket.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "base-purchase-ticket-template.fxml", "<APP NAME> - Purchasing Ticket", null, null);
-            }
-        });
-
     }
 }

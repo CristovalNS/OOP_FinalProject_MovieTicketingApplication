@@ -1,17 +1,22 @@
-package com.example.oop_finalproject_2;
+/**
+ * Abstract Class as a base template for all movie pages.
+ */
 
+package com.example.oop_finalproject_2.moviepages;
+
+import com.example.oop_finalproject_2.DBUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-//TODO: This is supposed to be abstract class. Temporarily set as normal.
-public class BasePurchaseTicketTemplateController implements Initializable {
+public abstract class BaseMovieTemplateController implements Initializable {
 
     @FXML
     private Button button_account;
@@ -29,13 +34,21 @@ public class BasePurchaseTicketTemplateController implements Initializable {
     private Button button_purchases;
 
     @FXML
-    private Button button_return;
+    private Label label_movie_desc;
 
-    @FXML
-    private Label label_movie_title;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Set button cursors
+        button_account.setCursor(Cursor.HAND);
+        button_food.setCursor(Cursor.HAND);
+        button_movies.setCursor(Cursor.HAND);
+        button_purchases.setCursor(Cursor.HAND);
+        button_buy_ticket.setCursor(Cursor.HAND);
+
+        label_movie_desc.setWrapText(true);
+        label_movie_desc.setMaxWidth(300);
+
         button_movies.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

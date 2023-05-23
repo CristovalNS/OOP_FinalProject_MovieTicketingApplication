@@ -5,6 +5,8 @@
 package com.example.oop_finalproject_2;
 
 import java.sql.Connection;
+
+import com.example.oop_finalproject_2.login_register.LoggedInController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
