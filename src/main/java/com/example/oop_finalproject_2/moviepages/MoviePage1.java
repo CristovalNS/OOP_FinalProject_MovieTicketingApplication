@@ -56,6 +56,7 @@ public class MoviePage1 extends BaseMovieTemplateController implements Initializ
                 // Retrieve the movie details from the result set
                 String movieTitle = resultSet.getString("movie_title");
                 String movieAvailability = resultSet.getString("movie_availability");
+                String movieAvailableTime = resultSet.getString("movie_schedule");
                 String director = resultSet.getString("movie_director");
                 String cast = resultSet.getString("movie_cast");
                 String description = resultSet.getString("movie_description");
@@ -69,7 +70,7 @@ public class MoviePage1 extends BaseMovieTemplateController implements Initializ
                 label_movie_cast.setText("Cast: " + cast);
                 label_movie_desc.setText(description);
                 label_releasedate_genre.setText("Release Date: " + releaseDate + " | Duration: " + duration);
-                label_available_date.setText("Availability: " + movieAvailability);
+                label_available_date.setText("Availability: " + movieAvailability + ", " + movieAvailableTime);
 
                 //TODO: FIX THIS SHIT ~ Load and set the image from the file
 //                Image image = new Image("file:" + posterPath);

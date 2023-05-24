@@ -24,4 +24,8 @@ module com.example.oop_finalproject_2 {
     opens com.example.oop_finalproject_2.mainmenu to javafx.fxml;
     exports com.example.oop_finalproject_2.account;
     opens com.example.oop_finalproject_2.account to javafx.fxml;
+    exports com.example.oop_finalproject_2.purchaseconfirm;
+    opens com.example.oop_finalproject_2.purchaseconfirm to javafx.fxml;
+    exports com.example.oop_finalproject_2.purchasehistory;
+    opens com.example.oop_finalproject_2.purchasehistory to javafx.fxml;
 }

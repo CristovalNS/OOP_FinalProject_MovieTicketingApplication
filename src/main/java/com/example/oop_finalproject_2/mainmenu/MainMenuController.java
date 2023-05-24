@@ -54,6 +54,13 @@ public class MainMenuController implements Initializable {
             }
         });
 
+        button_purchases.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.changeScene(event, "purchase-history.fxml", "<APP NAME> - Account", null, null);
+            }
+        });
+
         button_movieP1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
