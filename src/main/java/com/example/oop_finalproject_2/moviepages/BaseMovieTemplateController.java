@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public abstract class BaseMovieTemplateController implements Initializable {
+public class BaseMovieTemplateController implements Initializable {
 
     @FXML
     private Button button_account;

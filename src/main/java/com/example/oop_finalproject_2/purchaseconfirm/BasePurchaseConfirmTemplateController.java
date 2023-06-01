@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public abstract class BasePurchaseConfirmTemplateController implements Initializable {
+public class BasePurchaseConfirmTemplateController implements Initializable {
 
     @FXML
     private Button button_account;

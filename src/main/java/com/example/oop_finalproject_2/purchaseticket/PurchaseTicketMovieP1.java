@@ -2,13 +2,13 @@ package com.example.oop_finalproject_2.purchaseticket;
 
 import com.example.oop_finalproject_2.DBUtils;
 import com.example.oop_finalproject_2.SeatManager;
+import com.example.oop_finalproject_2.SeatSelection;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 
 import java.net.URL;
@@ -17,25 +17,166 @@ import java.util.ResourceBundle;
 
 public class PurchaseTicketMovieP1 extends BasePurchaseTicketTemplateController implements Initializable {
     @FXML
+    private Button button_A1;
+
+    @FXML
+    private Button button_A2;
+
+    @FXML
+    private Button button_A3;
+
+    @FXML
+    private Button button_A4;
+
+    @FXML
+    private Button button_A5;
+
+    @FXML
+    private Button button_A6;
+
+    @FXML
+    private Button button_A7;
+
+    @FXML
+    private Button button_A8;
+
+    @FXML
+    private Button button_B1;
+
+    @FXML
+    private Button button_B2;
+
+    @FXML
+    private Button button_B3;
+
+    @FXML
+    private Button button_B4;
+
+    @FXML
+    private Button button_B5;
+
+    @FXML
+    private Button button_B6;
+
+    @FXML
+    private Button button_B7;
+
+    @FXML
+    private Button button_B8;
+
+    @FXML
+    private Button button_C1;
+
+    @FXML
+    private Button button_C2;
+
+    @FXML
+    private Button button_C3;
+
+    @FXML
+    private Button button_C4;
+
+    @FXML
+    private Button button_C5;
+
+    @FXML
+    private Button button_C6;
+
+    @FXML
+    private Button button_C7;
+
+    @FXML
+    private Button button_C8;
+
+    @FXML
+    private Button button_D1;
+
+    @FXML
+    private Button button_D2;
+
+    @FXML
+    private Button button_D3;
+
+    @FXML
+    private Button button_D4;
+
+    @FXML
+    private Button button_D5;
+
+    @FXML
+    private Button button_D6;
+
+    @FXML
+    private Button button_D7;
+
+    @FXML
+    private Button button_D8;
+
+    @FXML
+    private Button button_E1;
+
+    @FXML
+    private Button button_E2;
+
+    @FXML
+    private Button button_E3;
+
+    @FXML
+    private Button button_E4;
+
+    @FXML
+    private Button button_E5;
+
+    @FXML
+    private Button button_E6;
+
+    @FXML
+    private Button button_E7;
+
+    @FXML
+    private Button button_E8;
+
+    @FXML
+    private Button button_F1;
+
+    @FXML
+    private Button button_F2;
+
+    @FXML
+    private Button button_F3;
+
+    @FXML
+    private Button button_F4;
+
+    @FXML
+    private Button button_F5;
+
+    @FXML
+    private Button button_F6;
+
+    @FXML
+    private Button button_F7;
+
+    @FXML
+    private Button button_F8;
+
+    @FXML
     private Button button_buy_ticket;
 
     @FXML
     private Button button_return;
 
     @FXML
-    private Label label_movie_title;
+    private Label label_movie_availability;
 
     @FXML
     private Label label_movie_duration;
 
     @FXML
-    private DatePicker date_movie_date;
-
-    @FXML
     private Label label_movie_time;
 
     @FXML
-    private Label label_movie_availability;
+    private Label label_movie_title;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,8 +215,6 @@ public class PurchaseTicketMovieP1 extends BasePurchaseTicketTemplateController 
             e.printStackTrace();
         }
 
-        date_movie_date.setStyle("-fx-font-family: Arial; -fx-font-size: 14px;");
-
         button_return.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -89,6 +228,47 @@ public class PurchaseTicketMovieP1 extends BasePurchaseTicketTemplateController 
                 DBUtils.changeScene(event, "purchase-confirm-movie-P1.fxml", "<APP NAME> - Guardians of The Galaxy Vol 3", null, null);
             }
         });
+
+        Button[] buttons_chairs_select = { button_A1, button_A2, button_A3, button_A4, button_A5, button_A6, button_A7, button_A8
+                , button_B1, button_B2, button_B3, button_B4, button_B5, button_B6, button_B7, button_B8
+                , button_C1, button_C2, button_C3, button_C4, button_C5, button_C6, button_C7, button_C8
+                , button_D1, button_D2, button_D3, button_D4, button_D5, button_D6, button_D7, button_D8
+                , button_E1, button_E2, button_E3, button_E4, button_E5, button_E6, button_E7, button_E8
+                , button_F1, button_F2, button_F3, button_F4, button_F5, button_F6, button_F7, button_F8};
+
+        SeatManager seatManager = new SeatManager();
+        SeatSelection ss = new SeatSelection();
+
+        for (Button button : buttons_chairs_select) {
+            button.setOnAction(event -> {
+                ButtonColorChanger.toggleButtonColor(button, seatManager);
+                String buttonText = button.getText();
+                ss.addButton(buttonText);
+
+                // Update the table based on button selection
+                try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookingData", "root", "*neoSQL01")) {
+                    String updateQuery = "UPDATE bookingData.seats_1 SET " + buttonText + " = ? WHERE movie_id = ?";
+//                    String updateQuery = "UPDATE bookingData.seats_1 SET A1 = 1 WHERE movie_id = 1"; // Testing purposes
+                    PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
+
+                    int buttonValue = 0; // Default value is unselected
+
+                    // Linear search to check if buttonText exists in the list of selected buttons
+                    if (SeatSelection.getSelectedButtons().contains(buttonText)) {
+                        buttonValue = 1; // Selected
+                    }
+
+                    updateStatement.setInt(1, buttonValue);
+                    updateStatement.setInt(2, 1); // movie_id = 1
+
+
+                    updateStatement.executeUpdate();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
 
     }
 }
