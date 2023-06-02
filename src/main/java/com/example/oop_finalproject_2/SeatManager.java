@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SeatManager {
-    private Set<Button> selectedSeats;
+    private static Set<Button> selectedSeats;
 
     public SeatManager() {
         selectedSeats = new HashSet<>();
@@ -26,7 +26,7 @@ public class SeatManager {
         return selectedSeats.contains(seatButton);
     }
 
-    public void printSelectedSeats() {
+    public static void printSelectedSeats() {
         System.out.print("Selected seats: ");
         for (Button seatButton : selectedSeats) {
             System.out.print(seatButton.getText() + ", ");
@@ -34,11 +34,7 @@ public class SeatManager {
         System.out.println();
     }
 
-    public Set<Button> getSelectedSeats() {
-        return selectedSeats;
-    }
-
-    public void setSelectedSeats(Set<Button> selectedSeats) {
-        this.selectedSeats = selectedSeats;
+    public static int getTotalSelectedSeats() {
+        return selectedSeats.size();
     }
 }

@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
@@ -17,7 +16,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class PurchaseTicketMovieP1 extends BasePurchaseTicketTemplateController implements Initializable {
+public class PurchaseTicketMovieP1_COPY extends BasePurchaseTicketTemplateController implements Initializable {
     @FXML
     private Button button_A1;
 
@@ -227,60 +226,66 @@ public class PurchaseTicketMovieP1 extends BasePurchaseTicketTemplateController 
         SeatManager seatManager = new SeatManager();
         SeatSelection ss = new SeatSelection();
 
-
         for (Button button : buttons_chairs_select) {
-            String buttonText = button.getText();
+            button.setOnAction(event -> {
 
-            // Update the table based on button selection
-            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookingData", "root", "*neoSQL01")) {
-                PreparedStatement selectStatement = connection.prepareStatement("SELECT " + buttonText + " FROM bookingData.seats_1 WHERE movie_id = ?");
-                selectStatement.setInt(1, 1); // movie_id = 1
-                ResultSet resultSet = selectStatement.executeQuery();
+                String buttonText = button.getText();
+                Connection connection2 = null;
+                ResultSet resultSet = null;
+                PreparedStatement selectStatement = null;
 
-                if (resultSet.next()) {
-                    int buttonValue = resultSet.getInt(buttonText);
+                try {
+                    connection2 = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/bookingData", "root", "*neoSQL01");
+                    selectStatement =  ((Connection) connection2).prepareStatement("SELECT * FROM bookingData.seats_1 WHERE movie_id = ?");
+                    selectStatement.setString(1, buttonText);
+                    resultSet = selectStatement.executeQuery();
 
-                    if (buttonValue == 1) {
-                        button.setStyle("-fx-background-color: red");
+                    if (resultSet.next()) {
+                        // The button has a value of '1' in the table
+                        // Perform the desired action here
+                        button.setDisable(true); // Disable the button
+                        button.setStyle("-fx-background-color: Red;"); // Change button text color to red
+
+                        System.out.println("Seat has been reserved!");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setContentText("Seat has been reserved!");
+
+                        // Set the font style for the text
+                        DialogPane dialogPane = alert.getDialogPane();
+                        dialogPane.setStyle("-fx-font-family: Arial");
+
+                    } else {
+                        // The button does not have a value of '1' in the table
+                        ButtonColorChanger.toggleButtonColor(button, seatManager);
+                        ss.addButton(buttonText);
+
+                        // Update the table based on button selection
+                        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookingData", "root", "*neoSQL01")) {
+                            String updateQuery = "UPDATE bookingData.seats_1 SET " + buttonText + " = ? WHERE movie_id = ?";
+                            PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
+
+                            int buttonValue = 0; // Default value is unselected
+
+                            // Linear search to check if buttonText exists in the list of selected buttons
+                            if (SeatSelection.getSelectedButtons().contains(buttonText)) {
+                                buttonValue = 1; // Selected
+                            }
+
+                            updateStatement.setInt(1, buttonValue);
+                            updateStatement.setInt(2, 1); // movie_id = 1
+
+                            updateStatement.executeUpdate();
+
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
                     }
 
-                    button.setOnAction(event -> {
-                        if (buttonValue == 1) {
-                            System.out.println("Seat has been reserved!");
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setContentText("Seat has been reserved!");
-
-                            // Set the font style for the text
-                            DialogPane dialogPane = alert.getDialogPane();
-                            dialogPane.setStyle("-fx-font-family: Arial");
-
-                            alert.showAndWait();
-                        } else {
-                            ButtonColorChanger.toggleButtonColor(button, seatManager);
-                            ss.addButton(buttonText);
-
-                            int buttonValueClicked = 0; // Selected
-
-                            if (SeatSelection.getSelectedButtons().contains(buttonText)) {
-                                buttonValueClicked = 2; // Selected
-                            }
-
-                            try {
-                                PreparedStatement updateStatement = connection.prepareStatement("UPDATE bookingData.seats_1 SET " + buttonText + " = ? WHERE movie_id = ?");
-                                updateStatement.setInt(1, buttonValueClicked);
-                                updateStatement.setInt(2, 1); // movie_id = 1
-                                updateStatement.executeUpdate();
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            });
         }
-
 
         button_return.setOnAction(new EventHandler<ActionEvent>() {
             @Override

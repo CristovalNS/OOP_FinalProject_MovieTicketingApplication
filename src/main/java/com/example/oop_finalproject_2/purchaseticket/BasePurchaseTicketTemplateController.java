@@ -210,24 +210,18 @@ public class BasePurchaseTicketTemplateController implements Initializable {
             button.setCursor(Cursor.HAND);
         }
 
-//        Button[] buttons_chairs_select = { button_A1, button_A2, button_A3, button_A4, button_A5, button_A6, button_A7, button_A8
-//                , button_B1, button_B2, button_B3, button_B4, button_B5, button_B6, button_B7, button_B8
-//                , button_C1, button_C2, button_C3, button_C4, button_C5, button_C6, button_C7, button_C8
-//                , button_D1, button_D2, button_D3, button_D4, button_D5, button_D6, button_D7, button_D8
-//                , button_E1, button_E2, button_E3, button_E4, button_E5, button_E6, button_E7, button_E8
-//                , button_F1, button_F2, button_F3, button_F4, button_F5, button_F6, button_F7, button_F8};
-//
-//        SeatManager seatManager = new SeatManager();
-//
-//        for (Button button : buttons_chairs_select) {
-//            ButtonColorChanger.addColorChangeEffect(button, seatManager);
-//        }
-
         // ChangeScenes after button click
         button_movies.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 DBUtils.changeScene(event, "main-menu.fxml", "<APP NAME> - Account", null, null);
+            }
+        });
+
+        button_purchases.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.changeScene(event, "purchase-history.fxml", "<APP NAME> - Account", null, null);
             }
         });
 

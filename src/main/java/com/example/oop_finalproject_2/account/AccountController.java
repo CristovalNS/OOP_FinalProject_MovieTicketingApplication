@@ -79,6 +79,13 @@ public class AccountController implements Initializable {
             }
         });
 
+        button_purchases.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.changeScene(event, "purchase-history.fxml", "<APP NAME> - Account", null, null);
+            }
+        });
+
         button_log_out.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

@@ -5,12 +5,6 @@ import com.example.oop_finalproject_2.SeatSelection;
 import javafx.scene.control.Button;
 
 public class ButtonColorChanger {
-
-    //TODO: Might be redundant. Marked for potential removal.
-    public static void addColorChangeEffect(Button button, SeatManager seatManager) {
-        button.setOnAction(event -> toggleButtonColor(button, seatManager));
-    }
-
     public static void toggleButtonColor(Button button, SeatManager seatManager) {
         if (seatManager.isSeatSelected(button)) {
             seatManager.unselectSeat(button);

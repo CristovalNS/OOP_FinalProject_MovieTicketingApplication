@@ -28,4 +28,6 @@ module com.example.oop_finalproject_2 {
     opens com.example.oop_finalproject_2.purchaseconfirm to javafx.fxml;
     exports com.example.oop_finalproject_2.purchasehistory;
     opens com.example.oop_finalproject_2.purchasehistory to javafx.fxml;
+    exports com.example.oop_finalproject_2.purchaseSuccessful;
+    opens com.example.oop_finalproject_2.purchaseSuccessful to javafx.fxml;
 }
