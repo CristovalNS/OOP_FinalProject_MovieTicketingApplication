@@ -65,7 +65,7 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Button>
-            <Label fx:id="label_movie_title" layoutX="233.0" layoutY="40.0" prefHeight="23.0" prefWidth="334.0" text="&lt;MOVIE TITLE&gt;">
+            <Label fx:id="movie_title" layoutX="233.0" layoutY="40.0" prefHeight="23.0" prefWidth="334.0" text="&lt;MOVIE TITLE&gt;">
                <font>
                   <Font name="Arial Rounded MT Bold" size="20.0" />
                </font>

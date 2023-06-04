@@ -55,20 +55,64 @@
       </AnchorPane>
       <AnchorPane prefHeight="676.0" prefWidth="605.0">
          <children>
-            <Label layoutX="39.0" layoutY="40.0" prefHeight="23.0" prefWidth="343.0" text="Ticket Purchase History">
+            <Label layoutX="39.0" layoutY="40.0" prefHeight="23.0" prefWidth="343.0" text="Purchased Tickets">
                <font>
                   <Font name="Arial Rounded MT Bold" size="20.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="41.0" layoutY="90.0" prefHeight="200.0" prefWidth="394.0" style="-fx-background-color: #FED700;">
+            <AnchorPane layoutX="41.0" layoutY="90.0" prefHeight="200.0" prefWidth="409.0" style="-fx-background-color: #FED700;">
                <children>
-                  <Label layoutX="13.0" layoutY="11.0" prefHeight="23.0" prefWidth="343.0" text="Ticket Purchase History">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="20.0" />
-                     </font>
-                  </Label>
+                  <AnchorPane layoutX="9.0" layoutY="11.0" prefHeight="179.0" prefWidth="374.0" style="-fx-background-color: #FFFFFF;">
+                     <children>
+                        <Label fx:id="label_movie_title" layoutX="15.0" layoutY="7.0" prefHeight="23.0" prefWidth="376.0" text="&lt;Movie Title&gt;">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="15.0" layoutY="52.0" text="Seats:">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="15.0" layoutY="91.0" text="Date:">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="15.0" layoutY="132.0" text="Time:">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="label_seat" layoutX="96.0" layoutY="52.0" prefHeight="16.0" prefWidth="143.0" text="Seat">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="label_date" layoutX="96.0" layoutY="91.0" prefHeight="16.0" prefWidth="146.0" text="Date">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="label_time" layoutX="95.0" layoutY="132.0" prefHeight="16.0" prefWidth="154.0" text="Time">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
+            <Button fx:id="button_next_ticket" alignment="CENTER" contentDisplay="CENTER" layoutX="258.0" layoutY="303.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="123.0" style="-fx-background-color: #0B0B45;" text="Next &gt;" textFill="#fcd200">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="button_previous_ticket" alignment="CENTER" contentDisplay="CENTER" layoutX="89.0" layoutY="303.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="126.0" style="-fx-background-color: #0B0B45;" text="&lt; Previous" textFill="#fcd200">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

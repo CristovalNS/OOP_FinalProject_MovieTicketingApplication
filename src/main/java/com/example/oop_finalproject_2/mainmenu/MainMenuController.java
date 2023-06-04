@@ -1,16 +1,20 @@
 package com.example.oop_finalproject_2.mainmenu;
 
 import com.example.oop_finalproject_2.DBUtils;
+import com.example.oop_finalproject_2.UserSession;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
@@ -57,7 +61,36 @@ public class MainMenuController implements Initializable {
         button_purchases.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "purchase-history.fxml", "<APP NAME> - Account", null, null);
+                // Establish a connection to the database
+                try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookingData", "root", "*neoSQL01")) {
+                    // Create a SQL statement
+                    String query = "SELECT * FROM reservation_data_1 WHERE user_id = ?";
+                    PreparedStatement statement = connection.prepareStatement(query);
+                    statement.setInt(1, DBUtils.getUserId(UserSession.getUsername()));
+
+                    // Execute the query
+                    ResultSet resultSet = statement.executeQuery();
+
+                    // Check if the user ID is found
+                    if (resultSet.next()) {
+                        // User ID found, proceed to change scene
+                        DBUtils.changeScene(event, "purchase-history.fxml", "<APP NAME> - Account", null, null);
+                    } else {
+                        // User ID not found, display an alert
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("No tickets purchased yet.");
+
+                        // Set the font style for the text
+                        DialogPane dialogPane = alert.getDialogPane();
+                        dialogPane.setStyle("-fx-font-family: Arial");
+
+                        alert.show();
+
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

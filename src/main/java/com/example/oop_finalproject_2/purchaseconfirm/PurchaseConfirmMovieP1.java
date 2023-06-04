@@ -19,6 +19,8 @@ import java.util.ResourceBundle;
 public class PurchaseConfirmMovieP1 extends BasePurchaseConfirmTemplateController implements Initializable {
 
     @FXML
+    private Label movie_title;
+    @FXML
     private Label seat_test;
 
     @FXML
@@ -45,7 +47,7 @@ public class PurchaseConfirmMovieP1 extends BasePurchaseConfirmTemplateControlle
 
         // Temp data
         int userId = DBUtils.getUserId(UserSession.getUsername());
-        int movie_id = 0;
+        String movie_title2 = "";
         StringBuilder seat_number = new StringBuilder();
         String reservation_date = "";
         String reservation_time = "";
@@ -65,18 +67,19 @@ public class PurchaseConfirmMovieP1 extends BasePurchaseConfirmTemplateControlle
                 String movieAvailability = resultSet.getString("movie_availability");
                 String movieAvailableTime = resultSet.getString("movie_schedule");
                 String duration = resultSet.getString("movie_duration");
-                String movieId = resultSet.getString("movie_id");
+                String movieTitle = resultSet.getString("movie_title");
 
                 // Set the retrieved values to the JavaFX labels and image view
+                movie_title.setText(movieTitle);
                 seat_test.setText(SeatSelection.getSelectedButtons() + "");
                 date_test.setText(movieAvailability);
                 time_test.setText(movieAvailableTime);
                 duration_test.setText(duration);
                 price_test.setText("Rp." + SeatManager.getTotalSelectedSeats() * 100000);
 
+                movie_title2 = movieTitle;
                 reservation_date = movieAvailability;
                 reservation_time = movieAvailableTime;
-                movie_id = Integer.parseInt(movieId);
             }
             resultSet.close();
             statement.close();
@@ -115,8 +118,9 @@ public class PurchaseConfirmMovieP1 extends BasePurchaseConfirmTemplateControlle
 
 
         String finalReservation_date = reservation_date;
-        int finalMovie_id = movie_id;
+        String finalMovieTitle = movie_title2;
         String finalReservation_time = reservation_time;
+
         button_buy_ticket.setOnAction(event -> {
             // Update the table to change the values
             try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookingData", "root", "*neoSQL01")) {
@@ -133,28 +137,28 @@ public class PurchaseConfirmMovieP1 extends BasePurchaseConfirmTemplateControlle
             }
 
             try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookingData", "root", "*neoSQL01")) {
-                String insertQuery = "INSERT INTO bookingData.reservation_data_1 (user_id, movie_id, seat_number, reservation_date, reservation_time) VALUES (?, ?, ?, ?, ?)";
+                String insertQuery = "INSERT INTO bookingData.reservation_data_1 (user_id, movie_title, seat_number, reservation_date, reservation_time) VALUES (?, ?, ?, ?, ?)";
                 PreparedStatement insertStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
 
                 insertStatement.setInt(1, userId);
-                insertStatement.setInt(2, finalMovie_id);
+                insertStatement.setString(2, finalMovieTitle);
                 insertStatement.setString(3, seat_number.toString());
                 insertStatement.setString(4, finalReservation_date);
                 insertStatement.setString(5, finalReservation_time);
 
                 // Debug
                 System.out.println("User ID: " + userId);
-                System.out.println("Movie ID: " + finalMovie_id);
+                System.out.println("Movie Title: " + finalMovieTitle);
                 System.out.println("Seat Number: " + seat_number);
-                System.out.println("Reservation Date: " + finalReservation_date);
-                System.out.println("Reservation Time: " + finalReservation_time);
+                System.out.println("com.example.oop_finalproject_2.Reservation Date: " + finalReservation_date);
+                System.out.println("com.example.oop_finalproject_2.Reservation Time: " + finalReservation_time);
 
                 int rowsAffected = insertStatement.executeUpdate();
                 if (rowsAffected > 0) {
                     ResultSet generatedKeys = insertStatement.getGeneratedKeys();
                     if (generatedKeys.next()) {
                         int reservationId = generatedKeys.getInt(1);
-                        System.out.println("Reservation ID: " + reservationId);
+                        System.out.println("com.example.oop_finalproject_2.Reservation ID: " + reservationId);
                     }
                     generatedKeys.close();
                 }

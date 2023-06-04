@@ -99,7 +99,7 @@ public class DBUtils {
 //                    changeScene(event, "logged-in.fxml", "<APP NAME> - Log In/Register", username, password);
 
                     System.out.println("Account successfully created!");
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION); // TODO: Fix
                     alert.setContentText("Account successfully created! Try loging in!");
 
                     // Set the font style for the text
