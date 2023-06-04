@@ -1,5 +1,6 @@
-package com.example.oop_finalproject_2.moviepages;
+package com.example.oop_finalproject_2.view;
 
+import com.example.oop_finalproject_2.controller.BaseMovieTemplate_Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -9,7 +10,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class MoviePage2 extends BaseMovieTemplateController implements Initializable {
+public class MoviePage2_View extends BaseMovieTemplate_Controller implements Initializable {
 
     @FXML
     private ImageView img_movie_poster;

@@ -1,6 +1,6 @@
-package com.example.oop_finalproject_2;
+package com.example.oop_finalproject_2.domainmodel;
 
-public class UserSession {
+public class UserSessionDM {
     protected static String username;
     protected static String password;
     protected static String email;
@@ -11,7 +11,7 @@ public class UserSession {
     }
 
     public static void setUsername(String username) {
-        UserSession.username = username;
+        UserSessionDM.username = username;
     }
 
     public static String getPassword() {
@@ -19,7 +19,7 @@ public class UserSession {
     }
 
     public static void setPassword(String password) {
-        UserSession.password = password;
+        UserSessionDM.password = password;
     }
 
     public static String getEmail() {
@@ -27,7 +27,7 @@ public class UserSession {
     }
 
     public static void setEmail(String email) {
-        UserSession.email = email;
+        UserSessionDM.email = email;
     }
 
     public static int getUserId() {
@@ -35,6 +35,6 @@ public class UserSession {
     }
 
     public static void setUserId(int userId) {
-        UserSession.userId = userId;
+        UserSessionDM.userId = userId;
     }
 }

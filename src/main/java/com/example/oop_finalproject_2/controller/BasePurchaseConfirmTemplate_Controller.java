@@ -1,4 +1,4 @@
-package com.example.oop_finalproject_2.purchaseconfirm;
+package com.example.oop_finalproject_2.controller;
 
 import com.example.oop_finalproject_2.DBUtils;
 import javafx.event.ActionEvent;
@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BasePurchaseConfirmTemplateController implements Initializable {
+public class BasePurchaseConfirmTemplate_Controller implements Initializable {
 
     @FXML
     private Button button_account;

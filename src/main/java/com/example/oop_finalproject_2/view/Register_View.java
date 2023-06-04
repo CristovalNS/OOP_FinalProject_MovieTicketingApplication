@@ -1,4 +1,4 @@
-package com.example.oop_finalproject_2.login_register;
+package com.example.oop_finalproject_2.view;
 
 import com.example.oop_finalproject_2.DBUtils;
 import javafx.event.ActionEvent;
@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RegisterController implements Initializable {
+public class Register_View implements Initializable {
 
     @FXML
     private Button button_login;

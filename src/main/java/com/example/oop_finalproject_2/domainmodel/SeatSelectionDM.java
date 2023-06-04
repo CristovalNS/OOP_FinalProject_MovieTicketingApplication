@@ -1,13 +1,13 @@
-package com.example.oop_finalproject_2;
+package com.example.oop_finalproject_2.domainmodel;
 
 import java.util.*;
 
-public class SeatSelection {
+public class SeatSelectionDM {
     private static Set<String> selectedButtons;
 
     private static List<String> sortButtonList;
 
-    public SeatSelection() {
+    public SeatSelectionDM() {
         selectedButtons = new HashSet<>();
         sortButtonList = new ArrayList<>();
     }
@@ -29,5 +29,9 @@ public class SeatSelection {
     public static List<String> getSelectedButtons() {
         Collections.sort(sortButtonList);
         return sortButtonList;
+    }
+
+    public static int getTotalSelectedSeats() {
+        return selectedButtons.size();
     }
 }

@@ -1,7 +1,7 @@
-package com.example.oop_finalproject_2.account;
+package com.example.oop_finalproject_2.view;
 
 import com.example.oop_finalproject_2.DBUtils;
-import com.example.oop_finalproject_2.UserSession;
+import com.example.oop_finalproject_2.domainmodel.UserSessionDM;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AccountController implements Initializable {
+public class Account_View implements Initializable {
     @FXML
     private Button button_account;
 
@@ -61,14 +61,14 @@ public class AccountController implements Initializable {
         button_log_out.setCursor(Cursor.HAND);
 
         // Retrieve user ID from the database and update the label
-        int userId = DBUtils.getUserId(UserSession.getUsername());
+        int userId = DBUtils.getUserId(UserSessionDM.getUsername());
         label_user_id.setText(String.valueOf(userId));
 
-        String userEmail = DBUtils.getUserEmail(UserSession.getUsername());
+        String userEmail = DBUtils.getUserEmail(UserSessionDM.getUsername());
         label_email.setText(String.valueOf(userEmail));
 
-        label_username.setText(UserSession.getUsername());
-        label_password.setText(UserSession.getPassword());
+        label_username.setText(UserSessionDM.getUsername());
+        label_password.setText(UserSessionDM.getPassword());
 
 
         // Change scenes

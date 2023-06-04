@@ -14,20 +14,12 @@ module com.example.oop_finalproject_2 {
 
     opens com.example.oop_finalproject_2 to javafx.fxml;
     exports com.example.oop_finalproject_2;
-    exports com.example.oop_finalproject_2.moviepages;
-    opens com.example.oop_finalproject_2.moviepages to javafx.fxml;
-    exports com.example.oop_finalproject_2.purchaseticket;
-    opens com.example.oop_finalproject_2.purchaseticket to javafx.fxml;
-    exports com.example.oop_finalproject_2.login_register;
-    opens com.example.oop_finalproject_2.login_register to javafx.fxml;
     exports com.example.oop_finalproject_2.mainmenu;
     opens com.example.oop_finalproject_2.mainmenu to javafx.fxml;
-    exports com.example.oop_finalproject_2.account;
-    opens com.example.oop_finalproject_2.account to javafx.fxml;
-    exports com.example.oop_finalproject_2.purchaseconfirm;
-    opens com.example.oop_finalproject_2.purchaseconfirm to javafx.fxml;
-    exports com.example.oop_finalproject_2.purchasehistory;
-    opens com.example.oop_finalproject_2.purchasehistory to javafx.fxml;
-    exports com.example.oop_finalproject_2.purchaseSuccessful;
-    opens com.example.oop_finalproject_2.purchaseSuccessful to javafx.fxml;
+    exports com.example.oop_finalproject_2.domainmodel;
+    opens com.example.oop_finalproject_2.domainmodel to javafx.fxml;
+    exports com.example.oop_finalproject_2.controller;
+    opens com.example.oop_finalproject_2.controller to javafx.fxml;
+    exports com.example.oop_finalproject_2.view;
+    opens com.example.oop_finalproject_2.view to javafx.fxml;
 }

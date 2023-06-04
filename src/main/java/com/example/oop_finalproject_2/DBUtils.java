@@ -6,7 +6,8 @@ package com.example.oop_finalproject_2;
 
 import java.sql.Connection;
 
-import com.example.oop_finalproject_2.login_register.LoggedInController;
+import com.example.oop_finalproject_2.domainmodel.UserSessionDM;
+import com.example.oop_finalproject_2.view.LoggedIn_View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -31,9 +32,9 @@ public class DBUtils {
                 root = loader.load();
 
                 // Log In
-                LoggedInController loggedInController = loader.getController();
-                loggedInController.usernameConfirmation(username);
-                loggedInController.userID(getUserId(username));
+                LoggedIn_View loggedInView = loader.getController();
+                loggedInView.usernameConfirmation(username);
+                loggedInView.userID(getUserId(username));
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -174,8 +175,8 @@ public class DBUtils {
 
                     if (retrievedPassword.equals(password)) {
                         // Stores the information of login
-                        UserSession.setUsername(username);
-                        UserSession.setPassword(password);
+                        UserSessionDM.setUsername(username);
+                        UserSessionDM.setPassword(password);
 //                        UserSession.setEmail(retrievedEmail);
 //                        UserSession.setUserId(userId);
 
@@ -303,5 +304,4 @@ public class DBUtils {
         }
         return userEmail;
     }
-
 }

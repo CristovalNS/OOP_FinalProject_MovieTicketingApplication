@@ -1,21 +1,24 @@
-package com.example.oop_finalproject_2.purchaseSuccessful;
+package com.example.oop_finalproject_2.controller;
 
 import com.example.oop_finalproject_2.DBUtils;
-import com.example.oop_finalproject_2.SeatManager;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PurchaseSuccessful implements Initializable {
+public class BaseMovieTemplate_Controller implements Initializable {
 
     @FXML
     private Button button_account;
+
+    @FXML
+    private Button button_buy_ticket;
 
     @FXML
     private Button button_food;
@@ -27,31 +30,24 @@ public class PurchaseSuccessful implements Initializable {
     private Button button_purchases;
 
     @FXML
-    private Button button_return;
+    private Label label_movie_desc;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        SeatManager.printSelectedSeats();
-        
         // Set button cursors
-        Button[] buttons = {button_account, button_food, button_purchases, button_return, button_movies};
+        Button[] buttons = {button_account, button_food, button_movies, button_purchases, button_buy_ticket};
         for (Button button : buttons) {
             button.setCursor(Cursor.HAND);
         }
 
-        // ChangeScenes after button click
+        label_movie_desc.setWrapText(true);
+        label_movie_desc.setMaxWidth(300);
+
         button_movies.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 DBUtils.changeScene(event, "main-menu.fxml", "<APP NAME> - Account", null, null);
-            }
-        });
-
-        button_account.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "account.fxml", "<APP NAME> - Account", null, null);
             }
         });
 
@@ -62,12 +58,11 @@ public class PurchaseSuccessful implements Initializable {
             }
         });
 
-        button_return.setOnAction(new EventHandler<ActionEvent>() {
+        button_account.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "main-menu.fxml", "<APP NAME> - Account", null, null);
+                DBUtils.changeScene(event, "account.fxml", "<APP NAME> - Account", null, null);
             }
         });
     }
-
 }

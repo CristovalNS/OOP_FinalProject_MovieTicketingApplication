@@ -1,7 +1,7 @@
 package com.example.oop_finalproject_2.mainmenu;
 
 import com.example.oop_finalproject_2.DBUtils;
-import com.example.oop_finalproject_2.UserSession;
+import com.example.oop_finalproject_2.domainmodel.UserSessionDM;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -10,8 +10,6 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.sql.*;
@@ -66,7 +64,7 @@ public class MainMenuController implements Initializable {
                     // Create a SQL statement
                     String query = "SELECT * FROM reservation_data_1 WHERE user_id = ?";
                     PreparedStatement statement = connection.prepareStatement(query);
-                    statement.setInt(1, DBUtils.getUserId(UserSession.getUsername()));
+                    statement.setInt(1, DBUtils.getUserId(UserSessionDM.getUsername()));
 
                     // Execute the query
                     ResultSet resultSet = statement.executeQuery();

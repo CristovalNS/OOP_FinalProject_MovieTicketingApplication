@@ -1,20 +1,18 @@
-package com.example.oop_finalproject_2.purchaseticket;
+package com.example.oop_finalproject_2.controller;
 
 import com.example.oop_finalproject_2.DBUtils;
-import com.example.oop_finalproject_2.SeatManager;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BasePurchaseTicketTemplateController implements Initializable {
+public class BasePurchaseTicketTemplate_Controller implements Initializable {
 
     @FXML
     private Button button_A1;
