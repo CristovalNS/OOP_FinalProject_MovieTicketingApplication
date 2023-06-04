@@ -60,6 +60,15 @@
                   <Font name="Arial Rounded MT Bold" size="20.0" />
                </font>
             </Label>
+            <AnchorPane layoutX="41.0" layoutY="90.0" prefHeight="200.0" prefWidth="394.0" style="-fx-background-color: #FED700;">
+               <children>
+                  <Label layoutX="13.0" layoutY="11.0" prefHeight="23.0" prefWidth="343.0" text="Ticket Purchase History">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

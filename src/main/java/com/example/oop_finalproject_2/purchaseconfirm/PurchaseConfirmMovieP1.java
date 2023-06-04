@@ -3,6 +3,7 @@ package com.example.oop_finalproject_2.purchaseconfirm;
 import com.example.oop_finalproject_2.DBUtils;
 import com.example.oop_finalproject_2.SeatManager;
 import com.example.oop_finalproject_2.SeatSelection;
+import com.example.oop_finalproject_2.UserSession;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -42,6 +43,13 @@ public class PurchaseConfirmMovieP1 extends BasePurchaseConfirmTemplateControlle
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle); // Call the initialize method of the parent class to set the button cursors
 
+        // Temp data
+        int userId = DBUtils.getUserId(UserSession.getUsername());
+        int movie_id = 0;
+        StringBuilder seat_number = new StringBuilder();
+        String reservation_date = "";
+        String reservation_time = "";
+
         // Establish a connection to the database - Movie Data
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movieData", "root", "*neoSQL01")) {
             // Create a SQL statement
@@ -57,6 +65,7 @@ public class PurchaseConfirmMovieP1 extends BasePurchaseConfirmTemplateControlle
                 String movieAvailability = resultSet.getString("movie_availability");
                 String movieAvailableTime = resultSet.getString("movie_schedule");
                 String duration = resultSet.getString("movie_duration");
+                String movieId = resultSet.getString("movie_id");
 
                 // Set the retrieved values to the JavaFX labels and image view
                 seat_test.setText(SeatSelection.getSelectedButtons() + "");
@@ -64,12 +73,17 @@ public class PurchaseConfirmMovieP1 extends BasePurchaseConfirmTemplateControlle
                 time_test.setText(movieAvailableTime);
                 duration_test.setText(duration);
                 price_test.setText("Rp." + SeatManager.getTotalSelectedSeats() * 100000);
+
+                reservation_date = movieAvailability;
+                reservation_time = movieAvailableTime;
+                movie_id = Integer.parseInt(movieId);
             }
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 
         button_return.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -99,8 +113,12 @@ public class PurchaseConfirmMovieP1 extends BasePurchaseConfirmTemplateControlle
             }
         });
 
+
+        String finalReservation_date = reservation_date;
+        int finalMovie_id = movie_id;
+        String finalReservation_time = reservation_time;
         button_buy_ticket.setOnAction(event -> {
-            // Update the table to change the values from 2 to 1
+            // Update the table to change the values
             try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookingData", "root", "*neoSQL01")) {
                 for (String buttonText : SeatSelection.getSelectedButtons()) {
 
@@ -108,12 +126,44 @@ public class PurchaseConfirmMovieP1 extends BasePurchaseConfirmTemplateControlle
                     updateStatement.setInt(1, 1); // Set value to 1
                     updateStatement.setInt(2, 1); // movie_id = 1
                     updateStatement.executeUpdate();
+                    seat_number.append(buttonText).append(" ");
                 }
-
-                DBUtils.changeScene(event, "purchase-successful.fxml", "<APP NAME> - Purchase Successful!", null, null);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
+            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookingData", "root", "*neoSQL01")) {
+                String insertQuery = "INSERT INTO bookingData.reservation_data_1 (user_id, movie_id, seat_number, reservation_date, reservation_time) VALUES (?, ?, ?, ?, ?)";
+                PreparedStatement insertStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+
+                insertStatement.setInt(1, userId);
+                insertStatement.setInt(2, finalMovie_id);
+                insertStatement.setString(3, seat_number.toString());
+                insertStatement.setString(4, finalReservation_date);
+                insertStatement.setString(5, finalReservation_time);
+
+                // Debug
+                System.out.println("User ID: " + userId);
+                System.out.println("Movie ID: " + finalMovie_id);
+                System.out.println("Seat Number: " + seat_number);
+                System.out.println("Reservation Date: " + finalReservation_date);
+                System.out.println("Reservation Time: " + finalReservation_time);
+
+                int rowsAffected = insertStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    ResultSet generatedKeys = insertStatement.getGeneratedKeys();
+                    if (generatedKeys.next()) {
+                        int reservationId = generatedKeys.getInt(1);
+                        System.out.println("Reservation ID: " + reservationId);
+                    }
+                    generatedKeys.close();
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            DBUtils.changeScene(event, "purchase-successful.fxml", "<APP NAME> - Purchase Successful!", null, null);
         });
     }
 }

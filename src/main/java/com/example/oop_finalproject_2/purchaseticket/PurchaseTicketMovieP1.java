@@ -259,20 +259,21 @@ public class PurchaseTicketMovieP1 extends BasePurchaseTicketTemplateController 
                             ButtonColorChanger.toggleButtonColor(button, seatManager);
                             ss.addButton(buttonText);
 
-                            int buttonValueClicked = 0; // Selected
-
-                            if (SeatSelection.getSelectedButtons().contains(buttonText)) {
-                                buttonValueClicked = 2; // Selected
-                            }
-
-                            try {
-                                PreparedStatement updateStatement = connection.prepareStatement("UPDATE bookingData.seats_1 SET " + buttonText + " = ? WHERE movie_id = ?");
-                                updateStatement.setInt(1, buttonValueClicked);
-                                updateStatement.setInt(2, 1); // movie_id = 1
-                                updateStatement.executeUpdate();
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
+                            // TODO: Remove this redundant piece of code. It has been implemented in purchaseConfirmMovieP1
+//                            int buttonValueClicked = 0; // Selected
+//
+//                            if (SeatSelection.getSelectedButtons().contains(buttonText)) {
+//                                buttonValueClicked = 2; // Selected
+//                            }
+//
+//                            try {
+//                                PreparedStatement updateStatement = connection.prepareStatement("UPDATE bookingData.seats_1 SET " + buttonText + " = ? WHERE movie_id = ?");
+//                                updateStatement.setInt(1, buttonValueClicked);
+//                                updateStatement.setInt(2, 1); // movie_id = 1
+//                                updateStatement.executeUpdate();
+//                            } catch (SQLException e) {
+//                                e.printStackTrace();
+//                            }
                         }
                     });
                 }
