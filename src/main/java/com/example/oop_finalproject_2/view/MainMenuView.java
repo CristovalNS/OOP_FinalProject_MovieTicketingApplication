@@ -1,6 +1,7 @@
-package com.example.oop_finalproject_2.mainmenu;
+package com.example.oop_finalproject_2.view;
 
 import com.example.oop_finalproject_2.DBUtils;
+import com.example.oop_finalproject_2.controller.MainMenuController;
 import com.example.oop_finalproject_2.domainmodel.UserSessionDM;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,7 +16,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class MainMenuController implements Initializable {
+public class MainMenuView implements Initializable {
 
     @FXML
     private Button button_account;
@@ -59,35 +60,10 @@ public class MainMenuController implements Initializable {
         button_purchases.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // Establish a connection to the database
-                try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookingData", "root", "*neoSQL01")) {
-                    // Create a SQL statement
-                    String query = "SELECT * FROM reservation_data_1 WHERE user_id = ?";
-                    PreparedStatement statement = connection.prepareStatement(query);
-                    statement.setInt(1, DBUtils.getUserId(UserSessionDM.getUsername()));
+                MainMenuController.purchaseCheck();
 
-                    // Execute the query
-                    ResultSet resultSet = statement.executeQuery();
-
-                    // Check if the user ID is found
-                    if (resultSet.next()) {
-                        // User ID found, proceed to change scene
-                        DBUtils.changeScene(event, "purchase-history.fxml", "<APP NAME> - Account", null, null);
-                    } else {
-                        // User ID not found, display an alert
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error");
-                        alert.setHeaderText("No tickets purchased yet.");
-
-                        // Set the font style for the text
-                        DialogPane dialogPane = alert.getDialogPane();
-                        dialogPane.setStyle("-fx-font-family: Arial");
-
-                        alert.show();
-
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                if (MainMenuController.purchaseCheck()) {
+                    DBUtils.changeScene(event, "purchase-history.fxml", "<APP NAME> - Account", null, null);
                 }
             }
         });

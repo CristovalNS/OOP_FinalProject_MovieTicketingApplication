@@ -14,8 +14,6 @@ module com.example.oop_finalproject_2 {
 
     opens com.example.oop_finalproject_2 to javafx.fxml;
     exports com.example.oop_finalproject_2;
-    exports com.example.oop_finalproject_2.mainmenu;
-    opens com.example.oop_finalproject_2.mainmenu to javafx.fxml;
     exports com.example.oop_finalproject_2.domainmodel;
     opens com.example.oop_finalproject_2.domainmodel to javafx.fxml;
     exports com.example.oop_finalproject_2.controller;
