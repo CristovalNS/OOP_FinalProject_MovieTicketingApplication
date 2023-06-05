@@ -1,6 +1,6 @@
 package com.example.oop_finalproject_2.domainmodel;
 
-public class MoviesDM {
+public class Movies {
     // Attributes
     private String movie_id;
     private String movie_title;

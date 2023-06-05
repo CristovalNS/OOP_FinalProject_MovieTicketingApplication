@@ -1,17 +1,17 @@
 package com.example.oop_finalproject_2.domainmodel;
 
-public class UserSessionDM {
-    protected static String username;
-    protected static String password;
-    protected static String email;
-    protected static int userId;
+public class Customer {
+    private static String username;
+    private static String password;
+    private static String email;
+    private static int userId;
 
     public static String getUsername() {
         return username;
     }
 
     public static void setUsername(String username) {
-        UserSessionDM.username = username;
+        Customer.username = username;
     }
 
     public static String getPassword() {
@@ -19,7 +19,7 @@ public class UserSessionDM {
     }
 
     public static void setPassword(String password) {
-        UserSessionDM.password = password;
+        Customer.password = password;
     }
 
     public static String getEmail() {
@@ -27,7 +27,7 @@ public class UserSessionDM {
     }
 
     public static void setEmail(String email) {
-        UserSessionDM.email = email;
+        Customer.email = email;
     }
 
     public static int getUserId() {
@@ -35,6 +35,6 @@ public class UserSessionDM {
     }
 
     public static void setUserId(int userId) {
-        UserSessionDM.userId = userId;
+        Customer.userId = userId;
     }
 }

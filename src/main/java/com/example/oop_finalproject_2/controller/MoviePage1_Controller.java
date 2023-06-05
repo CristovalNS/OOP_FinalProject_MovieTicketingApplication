@@ -1,16 +1,13 @@
 package com.example.oop_finalproject_2.controller;
 
-import com.example.oop_finalproject_2.domainmodel.MoviesDM;
-import com.example.oop_finalproject_2.view.MoviePage1_View;
+import com.example.oop_finalproject_2.domainmodel.Movies;
 
 import java.sql.*;
 
 public class MoviePage1_Controller {
 
-    public void setMoviePage1UI(MoviePage1_View moviePage1UI) {}
-
-    public MoviesDM getMovie(int movieId) {
-        MoviesDM movie = null;
+    public Movies getMovie(int movieId) {
+        Movies movie = null;
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movieData", "root", "*neoSQL01")) {
             String query = "SELECT * FROM movies WHERE movie_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -19,7 +16,7 @@ public class MoviePage1_Controller {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                movie = new MoviesDM();
+                movie = new Movies();
                 movie.setMovie_title(resultSet.getString("movie_title"));
                 movie.setMovie_availability(resultSet.getString("movie_availability"));
                 movie.setMovie_schedule(resultSet.getString("movie_schedule"));

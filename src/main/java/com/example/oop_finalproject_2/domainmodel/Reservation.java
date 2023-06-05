@@ -1,6 +1,6 @@
 package com.example.oop_finalproject_2.domainmodel;
 
-public class ReservationDM {
+public class Reservation {
     // Attributes
     private String reservation_id;
     private String user_id;

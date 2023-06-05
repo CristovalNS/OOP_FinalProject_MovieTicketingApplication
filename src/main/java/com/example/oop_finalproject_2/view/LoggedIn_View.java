@@ -15,8 +15,7 @@ import java.util.ResourceBundle;
 
 public class LoggedIn_View implements Initializable {
 
-    protected int tempID;
-    protected String username;
+     int tempID;
 
     @FXML
     private Button button_login_no;

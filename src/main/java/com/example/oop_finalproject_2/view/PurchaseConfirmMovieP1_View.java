@@ -1,11 +1,10 @@
 package com.example.oop_finalproject_2.view;
 
 import com.example.oop_finalproject_2.*;
-import com.example.oop_finalproject_2.controller.BasePurchaseConfirmTemplate_Controller;
 import com.example.oop_finalproject_2.controller.MoviePage1_Controller;
 import com.example.oop_finalproject_2.controller.PurchaseConfirmP1_Controller;
-import com.example.oop_finalproject_2.domainmodel.MoviesDM;
-import com.example.oop_finalproject_2.domainmodel.SeatSelectionDM;
+import com.example.oop_finalproject_2.domainmodel.Movies;
+import com.example.oop_finalproject_2.domainmodel.SeatSelection;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,7 +15,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PurchaseConfirmMovieP1_View extends BasePurchaseConfirmTemplate_Controller implements Initializable {
+public class PurchaseConfirmMovieP1_View extends BasePurchaseConfirmTemplate_View implements Initializable {
 
     @FXML
     private Label movie_title;
@@ -52,15 +51,15 @@ public class PurchaseConfirmMovieP1_View extends BasePurchaseConfirmTemplate_Con
         int movieId = 1;
 
         // Call the getMovie method on the moviePage1Controller instance
-        MoviesDM movie = movieController.getMovie(movieId);
+        Movies movie = movieController.getMovie(movieId);
 
         if (movie != null) {
             movie_title.setText(movie.getMovie_title());
-            seat_test.setText(SeatSelectionDM.getSelectedButtons() + "");
+            seat_test.setText(SeatSelection.getSelectedButtons() + "");
             date_test.setText(movie.getMovie_availability());
             time_test.setText(movie.getMovie_schedule());
             duration_test.setText(movie.getMovie_duration());
-            price_test.setText("Rp." + SeatSelectionDM.getTotalSelectedSeats() * 100000);
+            price_test.setText("Rp." + SeatSelection.getTotalSelectedSeats() * 100000);
         }
 
         button_return.setOnAction(new EventHandler<ActionEvent>() {

@@ -1,7 +1,7 @@
 package com.example.oop_finalproject_2.view;
 
 import com.example.oop_finalproject_2.DBUtils;
-import com.example.oop_finalproject_2.domainmodel.UserSessionDM;
+import com.example.oop_finalproject_2.domainmodel.Customer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -43,12 +43,6 @@ public class Account_View implements Initializable {
     @FXML
     private Button button_log_out;
 
-    protected String username;
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -61,14 +55,14 @@ public class Account_View implements Initializable {
         button_log_out.setCursor(Cursor.HAND);
 
         // Retrieve user ID from the database and update the label
-        int userId = DBUtils.getUserId(UserSessionDM.getUsername());
+        int userId = DBUtils.getUserId(Customer.getUsername());
         label_user_id.setText(String.valueOf(userId));
 
-        String userEmail = DBUtils.getUserEmail(UserSessionDM.getUsername());
+        String userEmail = DBUtils.getUserEmail(Customer.getUsername());
         label_email.setText(String.valueOf(userEmail));
 
-        label_username.setText(UserSessionDM.getUsername());
-        label_password.setText(UserSessionDM.getPassword());
+        label_username.setText(Customer.getUsername());
+        label_password.setText(Customer.getPassword());
 
 
         // Change scenes

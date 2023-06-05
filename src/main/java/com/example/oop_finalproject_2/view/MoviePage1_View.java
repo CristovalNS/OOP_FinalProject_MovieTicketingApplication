@@ -2,8 +2,7 @@ package com.example.oop_finalproject_2.view;
 
 import com.example.oop_finalproject_2.DBUtils;
 import com.example.oop_finalproject_2.controller.MoviePage1_Controller;
-import com.example.oop_finalproject_2.controller.BaseMovieTemplate_Controller;
-import com.example.oop_finalproject_2.domainmodel.MoviesDM;
+import com.example.oop_finalproject_2.domainmodel.Movies;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,7 +13,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MoviePage1_View extends BaseMovieTemplate_Controller implements Initializable {
+public class MoviePage1_View extends BaseMovieTemplate_View implements Initializable {
 
     @FXML
     private Button button_buy_ticket;
@@ -37,6 +36,10 @@ public class MoviePage1_View extends BaseMovieTemplate_Controller implements Ini
     @FXML
     private Label label_available_date;
 
+    @FXML
+    private Label label_movie_duration;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle); // Call the initialize method of the parent class to set the button cursors
@@ -48,17 +51,18 @@ public class MoviePage1_View extends BaseMovieTemplate_Controller implements Ini
         int movieId = 1;
 
         // Call the getMovie method on the moviePage1Controller instance
-        MoviesDM movie = movieController.getMovie(movieId);
+        Movies movie = movieController.getMovie(movieId);
 
         if (movieController != null) {
 
             if (movie != null) {
                 label_movie_name.setText(movie.getMovie_title());
                 label_movie_desc.setText(movie.getMovie_description());
-                label_releasedate_genre.setText("Release Date: " + movie.getRelease_date() + " | Duration: " + movie.getMovie_duration());
+                label_releasedate_genre.setText("Release Date: " + movie.getRelease_date() + " | Genre: " + movie.getMovie_genre());
                 label_movie_director.setText("Director: " + movie.getMovie_director());
                 label_movie_cast.setText("Cast: " + movie.getMovie_cast());
-                label_available_date.setText("Availability: " + movie.getMovie_availability() + ", " + movie.getMovie_schedule());
+                label_available_date.setText("Available Date: " + movie.getMovie_availability() + " | Time: " + movie.getMovie_schedule());
+                label_movie_duration.setText("Duration: " + movie.getMovie_duration());
             }
         } else {
             System.err.println("MoviePage1Controller is null. Make sure to set the MoviePage1Controller before initializing MoviePage1_UI.");

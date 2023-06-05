@@ -2,21 +2,17 @@ package com.example.oop_finalproject_2.view;
 
 import com.example.oop_finalproject_2.DBUtils;
 import com.example.oop_finalproject_2.controller.MainMenuController;
-import com.example.oop_finalproject_2.domainmodel.UserSessionDM;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.DialogPane;
 
 import java.net.URL;
-import java.sql.*;
 import java.util.ResourceBundle;
 
-public class MainMenuView implements Initializable {
+public class MainMenu_View implements Initializable {
 
     @FXML
     private Button button_account;

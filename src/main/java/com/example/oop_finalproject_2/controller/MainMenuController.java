@@ -1,8 +1,7 @@
 package com.example.oop_finalproject_2.controller;
 
 import com.example.oop_finalproject_2.DBUtils;
-import com.example.oop_finalproject_2.domainmodel.UserSessionDM;
-import javafx.event.ActionEvent;
+import com.example.oop_finalproject_2.domainmodel.Customer;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 
@@ -16,7 +15,7 @@ public class MainMenuController {
             // Create a SQL statement
             String query = "SELECT * FROM reservation_data_1 WHERE user_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, DBUtils.getUserId(UserSessionDM.getUsername()));
+            statement.setInt(1, DBUtils.getUserId(Customer.getUsername()));
 
             // Execute the query
             ResultSet resultSet = statement.executeQuery();

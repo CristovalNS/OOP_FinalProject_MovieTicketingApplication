@@ -1,5 +1,6 @@
-package com.example.oop_finalproject_2.domainmodel;
+package com.example.oop_finalproject_2.controller;
 
+import com.example.oop_finalproject_2.domainmodel.SeatSelection;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
@@ -10,14 +11,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SeatManagerDM {
-    private SeatSelectionDM seatSelectionDM;
+public class SeatManager_Controller {
+    private SeatSelection seatSelection;
 
-    public SeatManagerDM(SeatSelectionDM seatSelectionDM) {
-        this.seatSelectionDM = seatSelectionDM;
+    public SeatManager_Controller(SeatSelection seatSelection) {
+        this.seatSelection = seatSelection;
     }
 
-    public void handleButtonAction(Button button, String buttonText, SeatManagerDM seatManagerDM) {
+    public void handleButtonAction(Button button, String buttonText, SeatManager_Controller seatManagerController) {
         int buttonValue = getButtonValueFromDatabase(buttonText);
 
         if (buttonValue == 1) {
@@ -31,18 +32,18 @@ public class SeatManagerDM {
 
             alert.showAndWait();
         } else {
-            toggleButtonColor(button, String.valueOf(seatManagerDM));
-            seatSelectionDM.addButton(buttonText);
-            System.out.println(SeatSelectionDM.getSelectedButtons()); // Debug purposes
+            toggleButtonColor(button, String.valueOf(seatManagerController));
+            seatSelection.addButton(buttonText);
+            System.out.println(SeatSelection.getSelectedButtons()); // Debug purposes
         }
     }
 
 
-    public void initializeButtons(Button[] buttons, SeatManagerDM seatManagerDM) {
+    public void initializeButtons(Button[] buttons, SeatManager_Controller seatManagerController) {
         for (Button button : buttons) {
             String buttonText = button.getText();
             System.out.println(buttonText);
-            button.setOnAction(event -> handleButtonAction(button, buttonText, seatManagerDM));
+            button.setOnAction(event -> handleButtonAction(button, buttonText, seatManagerController));
             if (getButtonValueFromDatabase(buttonText) == 1) {
                 button.setStyle("-fx-background-color: red");
             }

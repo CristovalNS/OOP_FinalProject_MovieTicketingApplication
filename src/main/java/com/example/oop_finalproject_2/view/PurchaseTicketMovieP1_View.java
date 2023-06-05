@@ -2,10 +2,9 @@ package com.example.oop_finalproject_2.view;
 
 import com.example.oop_finalproject_2.*;
 import com.example.oop_finalproject_2.controller.MoviePage1_Controller;
-import com.example.oop_finalproject_2.domainmodel.MoviesDM;
-import com.example.oop_finalproject_2.domainmodel.SeatManagerDM;
-import com.example.oop_finalproject_2.domainmodel.SeatSelectionDM;
-import com.example.oop_finalproject_2.controller.BasePurchaseTicketTemplate_Controller;
+import com.example.oop_finalproject_2.domainmodel.Movies;
+import com.example.oop_finalproject_2.controller.SeatManager_Controller;
+import com.example.oop_finalproject_2.domainmodel.SeatSelection;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,7 +17,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PurchaseTicketMovieP1_View extends BasePurchaseTicketTemplate_Controller implements Initializable {
+public class PurchaseTicketMovieP1_View extends BasePurchaseTicketTemplate_View implements Initializable {
     @FXML
     private Button button_A1;
 
@@ -192,7 +191,7 @@ public class PurchaseTicketMovieP1_View extends BasePurchaseTicketTemplate_Contr
         int movieId = 1;
 
         // Call the getMovie method on the moviePage1Controller instance
-        MoviesDM movie = movieController.getMovie(movieId);
+        Movies movie = movieController.getMovie(movieId);
 
         if (movie != null) {
             label_movie_title.setText(movie.getMovie_title());
@@ -201,8 +200,8 @@ public class PurchaseTicketMovieP1_View extends BasePurchaseTicketTemplate_Contr
             label_movie_time.setText(movie.getMovie_schedule());
         }
 
-        SeatSelectionDM seatSelectionDM = new SeatSelectionDM();
-        SeatManagerDM seatManagerDM = new SeatManagerDM(seatSelectionDM);
+        SeatSelection seatSelection = new SeatSelection();
+        SeatManager_Controller seatManagerController = new SeatManager_Controller(seatSelection);
 
         Button[] buttons = new Button[]{button_A1, button_A2, button_A3, button_A4, button_A5, button_A6, button_A7, button_A8
                 , button_B1, button_B2, button_B3, button_B4, button_B5, button_B6, button_B7, button_B8
@@ -211,7 +210,7 @@ public class PurchaseTicketMovieP1_View extends BasePurchaseTicketTemplate_Contr
                 , button_E1, button_E2, button_E3, button_E4, button_E5, button_E6, button_E7, button_E8
                 , button_F1, button_F2, button_F3, button_F4, button_F5, button_F6, button_F7, button_F8};
 
-        seatManagerDM.initializeButtons(buttons, seatManagerDM);
+        seatManagerController.initializeButtons(buttons, seatManagerController);
 
         button_return.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -223,7 +222,7 @@ public class PurchaseTicketMovieP1_View extends BasePurchaseTicketTemplate_Contr
         button_buy_ticket.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (SeatSelectionDM.getTotalSelectedSeats() == 0) {
+                if (SeatSelection.getTotalSelectedSeats() == 0) {
                     System.out.println("No seats selected! Can't select purchase button.");
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("Please select a seat to purchase!");

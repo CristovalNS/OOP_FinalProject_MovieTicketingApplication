@@ -1,4 +1,4 @@
-package com.example.oop_finalproject_2.controller;
+package com.example.oop_finalproject_2.view;
 
 import com.example.oop_finalproject_2.DBUtils;
 import javafx.event.ActionEvent;
@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BaseMovieTemplate_Controller implements Initializable {
+public class BasePurchaseConfirmTemplate_View implements Initializable {
 
     @FXML
     private Button button_account;
@@ -30,24 +30,24 @@ public class BaseMovieTemplate_Controller implements Initializable {
     private Button button_purchases;
 
     @FXML
-    private Label label_movie_desc;
+    private Button button_return;
 
+    @FXML
+    private Label label_movie_title;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Set button cursors
-        Button[] buttons = {button_account, button_food, button_movies, button_purchases, button_buy_ticket};
+        Button[] buttons = {button_account, button_food, button_buy_ticket, button_purchases, button_return, button_movies};
         for (Button button : buttons) {
             button.setCursor(Cursor.HAND);
         }
 
-        label_movie_desc.setWrapText(true);
-        label_movie_desc.setMaxWidth(300);
-
+        // ChangeScenes after button click
         button_movies.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "main-menu.fxml", "<APP NAME> - Account", null, null);
+                DBUtils.changeScene(event, "main-menu.fxml", "<APP NAME> - Movies", null, null);
             }
         });
 

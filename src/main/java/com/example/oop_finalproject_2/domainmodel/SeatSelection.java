@@ -2,12 +2,12 @@ package com.example.oop_finalproject_2.domainmodel;
 
 import java.util.*;
 
-public class SeatSelectionDM {
+public class SeatSelection {
     private static Set<String> selectedButtons;
 
     private static List<String> sortButtonList;
 
-    public SeatSelectionDM() {
+    public SeatSelection() {
         selectedButtons = new HashSet<>();
         sortButtonList = new ArrayList<>();
     }

@@ -6,7 +6,7 @@ package com.example.oop_finalproject_2;
 
 import java.sql.Connection;
 
-import com.example.oop_finalproject_2.domainmodel.UserSessionDM;
+import com.example.oop_finalproject_2.domainmodel.Customer;
 import com.example.oop_finalproject_2.view.LoggedIn_View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -21,8 +21,6 @@ import java.sql.*;
 import java.io.IOException;
 
 public class DBUtils {
-    public static Integer getUserIdFromDatabase;
-
     public static void changeScene(ActionEvent event, String fxmlFile, String title, String username, String password) {
         Parent root = null;
 
@@ -172,13 +170,17 @@ public class DBUtils {
             } else {
                 while (resultSet.next()) {
                     String retrievedPassword = resultSet.getString("password");
+//                    String retrievedEmail = resultSet.getString("email");
+//                    String retrievedUserID = resultSet.getString("user_id");
 
                     if (retrievedPassword.equals(password)) {
                         // Stores the information of login
-                        UserSessionDM.setUsername(username);
-                        UserSessionDM.setPassword(password);
-//                        UserSession.setEmail(retrievedEmail);
-//                        UserSession.setUserId(userId);
+                        Customer customer = new Customer();
+
+                        Customer.setUsername(username);
+                        Customer.setPassword(password);
+//                        UserSessionDM.setEmail(retrievedEmail);
+//                        UserSessionDM.setUserId(Integer.parseInt(retrievedUserID));
 
                         changeScene(event, "logged-in.fxml", "Welcome!", username, password);
                     } else {

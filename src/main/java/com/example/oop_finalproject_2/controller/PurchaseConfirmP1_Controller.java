@@ -1,18 +1,16 @@
 package com.example.oop_finalproject_2.controller;
 
 import com.example.oop_finalproject_2.DBUtils;
-import com.example.oop_finalproject_2.domainmodel.MoviesDM;
-import com.example.oop_finalproject_2.domainmodel.SeatSelectionDM;
-import com.example.oop_finalproject_2.domainmodel.UserSessionDM;
+import com.example.oop_finalproject_2.domainmodel.Movies;
+import com.example.oop_finalproject_2.domainmodel.SeatSelection;
+import com.example.oop_finalproject_2.domainmodel.Customer;
 
 import java.sql.*;
 
 public class PurchaseConfirmP1_Controller {
-    private Connection connection;
-
     public static void releaseSelectedSeats() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookingData", "root", "*neoSQL01")) {
-            String[] buttonNames = SeatSelectionDM.getSelectedButtons().toArray(new String[0]);
+            String[] buttonNames = SeatSelection.getSelectedButtons().toArray(new String[0]);
 
             for (String button : buttonNames) {
                 String updateQuery = "UPDATE bookingData.seats_1 SET " + button + " = ? WHERE movie_id = ?";
@@ -29,7 +27,7 @@ public class PurchaseConfirmP1_Controller {
     }
 
     public static void reserveSeats() {
-        int userId = DBUtils.getUserId(UserSessionDM.getUsername());
+        int userId = DBUtils.getUserId(Customer.getUsername());
         // Create an instance of MoviePage1Controller
         MoviePage1_Controller movieController = new MoviePage1_Controller();
 
@@ -37,10 +35,10 @@ public class PurchaseConfirmP1_Controller {
         int movieId = 1;
 
         // Call the getMovie method on the moviePage1Controller instance
-        MoviesDM movie = movieController.getMovie(movieId);
+        Movies movie = movieController.getMovie(movieId);
 
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookingData", "root", "*neoSQL01")) {
-            for (String buttonText : SeatSelectionDM.getSelectedButtons()) {
+            for (String buttonText : SeatSelection.getSelectedButtons()) {
 
                 PreparedStatement updateStatement = connection.prepareStatement("UPDATE bookingData.seats_1 SET " + buttonText + " = ? WHERE movie_id = ?");
                 updateStatement.setInt(1, 1); // Set value to 1
@@ -55,7 +53,7 @@ public class PurchaseConfirmP1_Controller {
             String insertQuery = "INSERT INTO bookingData.reservation_data_1 (user_id, movie_title, seat_number, reservation_date, reservation_time) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement insertStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
 
-            String seatNumbers = String.join(", ", SeatSelectionDM.getSelectedButtons());
+            String seatNumbers = String.join(", ", SeatSelection.getSelectedButtons());
 
             insertStatement.setInt(1, userId);
             insertStatement.setString(2, movie.getMovie_title());
